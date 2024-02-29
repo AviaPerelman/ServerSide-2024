@@ -66,11 +66,12 @@
         public int Insert()
         {
             DBservices dbs = new DBservices();
-            List<Vacation> vacationsList = Read();
+            List<Vacation> vacationsList = dbs.ReadVacations();
             List<User> users = dbs.ReadUsers();
 
             if (this.flatId == -1 || this.endDate == DateTime.MinValue || IsRented(this))
             {
+                
                 return -1;
             }
 

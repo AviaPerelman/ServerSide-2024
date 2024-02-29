@@ -20,15 +20,16 @@
             // קישור הקליינט לשרת
 
             server = "https://localhost:7031/";
-
+            //where is the line in your code ?
             // חיווט כפתור סאבמיט
             $("#FormId").submit(submitVacation);
             $("#vacations").click(getVacations);
 
             let holdId = sessionStorage.getItem('key');
             let holdEmail = JSON.parse(sessionStorage.getItem('userLoggedIn'));
-            console.log(holdEmail.email);
-
+            //console.log(holdEmail.email);
+            if (!holdEmail)
+                return;
 
             $("#flatid").val(holdId);
             $('#userid').val(holdEmail.email);
@@ -107,25 +108,33 @@
                 endDate: endDate.toISOString()
 
             };
-
-
             let api = server + "api/Vacations";
-
             ajaxCall("POST", api, JSON.stringify(newVacation), postSCB, postECB);
-
         }
 
         // success callback function
         function postSCB(objectFromServer) {
-            alert("Vacation added successfully")
+
             console.log(objectFromServer);
 
+            if (objectFromServer === -1) {
+                postECB("Flat is taken in those dates");
+            } else {
+                console.log("Vacation added successfully");
+                setTimeout(() => {
+                    alert("Vacation added successfully")
+                },1)
+            }    
         }
 
         // error callback function
         function postECB(errorFromServer) {
-            alert("Flat is taken in those dates")
+         
             console.log(errorFromServer);
+            setTimeout(() => {
+                alert("Flat is taken in those dates")
+            }, 1)
+
         }
 
 
@@ -144,31 +153,45 @@
         // success callback function
         function getSCB(vacationsList) {
 
-            let vacationsContainer = document.getElementById("divContainer");
+            console.log(vacationsList)
 
-            vacationsContainer.innerHTML = "";
-
-            let vacationElements = vacationsList.map(function (vacation) {
+            if (vacationsList.length > 0) {
 
 
-                let startDateNew = new Date(vacation.startDate).toISOString().slice(0, 10);
-                let endDateNew = new Date(vacation.endDate).toISOString().slice(0, 10);
+
+                let vacationsContainer = document.getElementById("divContainer");
+
+                vacationsContainer.innerHTML = "";
+
+                let vacationElements = vacationsList.map(function (vacation) {
 
 
-                let newDiv = document.createElement('div');
+                    let startDateNew = new Date(vacation.startDate).toISOString().slice(0, 10);
+                    let endDateNew = new Date(vacation.endDate).toISOString().slice(0, 10);
 
-                let tempVacation = `Vacation detalis: Id: ${vacation.id} User Id: ${vacation.userId} FlatId: ${vacation.flatId} start date: ${startDateNew} end date: ${endDateNew}`
 
-                newDiv.innerHTML = tempVacation;
+                    let newDiv = document.createElement('div');
 
-                vacationsContainer.appendChild(newDiv)
+                    let tempVacation = `Vacation detalis: Id: ${vacation.id} User Id: ${vacation.userId} FlatId: ${vacation.flatId} start date: ${startDateNew} end date: ${endDateNew}`
 
-                return newDiv;
+                    newDiv.innerHTML = tempVacation;
 
-            });
-            vacationElements.forEach(function (div) {
-                vacationsContainer.appendChild(div);
-            })
+                    vacationsContainer.appendChild(newDiv)
+
+                    return newDiv;
+
+                });
+                vacationElements.forEach(function (div) {
+                    vacationsContainer.appendChild(div);
+                })
+            }
+
+            else {
+
+                let vacationsContainer = document.getElementById("divContainer");
+
+                vacationsContainer.innerHTML = "you have no booked vacations";
+            }
 
         }
 

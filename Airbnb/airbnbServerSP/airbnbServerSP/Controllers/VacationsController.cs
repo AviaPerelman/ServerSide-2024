@@ -42,6 +42,7 @@ namespace HomeWork2.Controllers
         [HttpPost]
         public int Post([FromBody] Vacation vacation)
         {
+
             return vacation.Insert();
         }
 

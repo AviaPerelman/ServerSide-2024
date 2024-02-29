@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qCB3DXuia7MtYIn7fMnYkuSyr9+s4kAN4uogv9qAFneXFMhlqtLcRuKsdIZlFvlx5/yckZ4v2Q1f5Z1RRrq8uQ==",
+  "dgSpecHash": "VgGsJjN3uaWNp0pvzxCeVjMGqkri+Hjd8tNZ254D+wXPZbq6MnkQIaEkk34Q4YLeAkrUgxg3o7/7hEVbu/Kpcw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSideCourse\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
+  "projectFilePath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\משתמש\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\משתמש\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",

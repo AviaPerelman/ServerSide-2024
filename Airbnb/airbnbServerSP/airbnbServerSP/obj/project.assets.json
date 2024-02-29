@@ -901,11 +901,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSideCourse\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
+      "projectUniqueName": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
       "projectName": "airbnbServerSP",
-      "projectPath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSideCourse\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
+      "projectPath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
       "packagesPath": "C:\\Users\\משתמש\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSideCourse\\Airbnb\\airbnbServerSP\\airbnbServerSP\\obj\\",
+      "outputPath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\משתמש\\AppData\\Roaming\\NuGet\\NuGet.Config",
