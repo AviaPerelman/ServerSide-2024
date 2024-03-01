@@ -1,4 +1,4 @@
-﻿function ajaxCall(method, api, data, successCB, errorCB) {
+﻿function ajaxCalls(method, api, data, successCB, errorCB) {
     $.ajax({
         type: method,
         url: api,
@@ -6,7 +6,12 @@
         cache: false,
         contentType: "application/json",
         dataType: "json",
-        success: successCB,
+        success: function (response) {
+            successCB(response)
+        },
         error: errorCB
     });
+
+    
+
 }

@@ -62,7 +62,7 @@ namespace HomeWork2.Controllers
 
         // DELETE api/<UsersController>/5
         [HttpDelete("delete")]
-        public int Delete(string email)
+        public int Delete([FromBody] string email)
         {
             User user = new User();
             return user.Delete(email);

@@ -896,19 +896,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\משתמש\\.nuget\\packages\\": {}
+    "C:\\Users\\talhi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
+      "projectUniqueName": "C:\\Users\\talhi\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
       "projectName": "airbnbServerSP",
-      "projectPath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
-      "packagesPath": "C:\\Users\\משתמש\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\משתמש\\OneDrive\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\obj\\",
+      "projectPath": "C:\\Users\\talhi\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\airbnbServerSP.csproj",
+      "packagesPath": "C:\\Users\\talhi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\talhi\\Desktop\\ServerSide-2024\\Airbnb\\airbnbServerSP\\airbnbServerSP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\משתמש\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\talhi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

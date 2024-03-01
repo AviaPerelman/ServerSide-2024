@@ -155,7 +155,7 @@
                 
                 let api = server + "api/Users";
 
-                ajaxCall("POST", api, JSON.stringify(newUser), postSCB, postECB);
+                ajaxCalls("POST", api, JSON.stringify(newUser), postSCB, postECB);
             }
 
 
@@ -199,7 +199,7 @@
 
                 let api = server + `api/Users/login`;
 
-                ajaxCall("POST", api, JSON.stringify(loginData), postSUL, postEUL);
+                ajaxCalls("POST", api, JSON.stringify(loginData), postSUL, postEUL);
                 
 
             }
@@ -248,7 +248,7 @@
                 let api = server + `api/Users/update`; // Construct the API endpoint URL with the email
 
 
-                ajaxCall("PUT", api, JSON.stringify(updatedUser), putSUB, putEUB);
+                ajaxCalls("PUT", api, JSON.stringify(updatedUser), putSUB, putEUB);
             }
 
             function putSUB(response) {

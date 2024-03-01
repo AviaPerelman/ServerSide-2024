@@ -49,7 +49,7 @@
         function getFlats() {
             let api = server + "api/Flats";
 
-            ajaxCall("GET", api, "", getSCB, getECB);
+            ajaxCalls("GET", api, "", getSCB, getECB);
         }
 
         // success callback function
@@ -118,7 +118,7 @@
             }
 
             api = server + "api/Flats";
-            ajaxCall("POST", api, JSON.stringify(newFlat), postSCB, postECB);
+            ajaxCalls("POST", api, JSON.stringify(newFlat), postSCB, postECB);
 
         }
 

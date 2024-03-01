@@ -111,7 +111,7 @@
 
             };
             let api = server + "api/Vacations";
-            ajaxCall("POST", api, JSON.stringify(newVacation), postSCB, postECB);
+            ajaxCalls("POST", api, JSON.stringify(newVacation), postSCB, postECB);
 
             
 
@@ -151,7 +151,7 @@
             let api = server + "api/Vacations/getByEmail";
             let email = $('#userid').val();  // assuming this gets the user's email
             api += `?email=${encodeURIComponent(email)}`;  // append email as a query parameter
-            ajaxCall("GET", api, null, getSCB, getECB);
+            ajaxCalls("GET", api, null, getSCB, getECB);
         }
 
         // error callback function
