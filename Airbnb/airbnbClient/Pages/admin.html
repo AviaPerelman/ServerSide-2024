@@ -40,11 +40,20 @@
 
             $("#updateForm").submit(onSubmitFunc);
 
+
+            $(document).on("click", "#hideBtn", function () {
+                $("#editDiv").hide();
+
+
+            });
+
+
             $(document).on("click", "#showManageUserTable", function () {
                 $("#container").toggle();
 
 
             });
+            
             $('#editDiv').hide();
         });
 
@@ -344,6 +353,9 @@
 
                 <button type="submit" class="btn btn-primary btn-lg" id="saveBTN">
                     Save
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" id="hideBtn">
+                    Hide
                 </button>
             </form>
         </div>
