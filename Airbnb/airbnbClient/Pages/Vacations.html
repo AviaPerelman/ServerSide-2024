@@ -95,7 +95,9 @@
         }
 
 
-        function submitVacation() {
+        function submitVacation(event) {
+
+            event.preventDefault()
 
             let startDate = new Date($("#start").val());
             let endDate = new Date($("#end").val());
@@ -120,6 +122,9 @@
         function postSCB(objectFromServer) {
 
             console.log(objectFromServer);
+
+            $('#start').val("");
+            $("#end").val("");
 
             if (objectFromServer === -1) {
                 postECB("Flat is taken in those dates");

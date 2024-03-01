@@ -9,13 +9,17 @@ namespace HomeWork2.BL
         string lastName;
         string email;
         string password;
+        bool isActive;
+        bool isAdmin;
 
-        public User(string firstName, string lastName, string email, string password)
+        public User(string firstName, string lastName, string email, string password, bool isActive, bool isAdmin)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
             this.password = password;
+            this.isActive = isActive;
+            this.isAdmin = isAdmin;
         }
 
         public User() { }
@@ -24,6 +28,10 @@ namespace HomeWork2.BL
         public string LastName { get => lastName; set => lastName = value; }
         public string Email { get => email; set => email = value; }
         public string Password { get => password; set => password = value; }
+
+        public bool IsActive { get => isActive; set => isActive = value; }
+
+        public bool IsAdmin { get => isAdmin; set => isAdmin = value; }
 
         // insert user - registration
         public int Insert()

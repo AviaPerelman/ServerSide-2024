@@ -1,248 +1,4 @@
-﻿<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
-    <link href="../css/Register.css" rel="stylesheet" />
-    <link href="../CSS/register.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-            crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../js/ajax.js"></script>-->
-<!--<script src="../Scripts/ajaxCalls.js"></script>-->
-<!--</head>
-<body>
-
-    <div id="form-container">
-        <div class="form-wrapper">
-            <h2>User Registration</h2>
-            <form id="registrationForm">
-                <label for="firstname">Firstname:</label>
-                <input type="text" id="firstName" required><br><br>
-                <label for="familyname">Familyname:</label>
-                <input type="text" id="familyName" required><br><br>
-                <label for="email">Email:</label>
-                <input type="text" id="email" required><br><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" required><br><br>
-                <button type="submit">Register</button>
-                <button type="button" id="updateBtn">Update</button>
-            </form>
-        </div>
-
-        <div class="form-wrapper">
-            <h2>User Login</h2>
-            <form id="loginForm">
-                <label for="loginEmail">Email:</label>
-                <input type="text" id="loginEmail" required><br><br>
-                <label for="loginPassword">Password:</label>
-                <input type="password" id="loginPassword" required><br><br>
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    </div>-->
-<!-- Your existing HTML content for ordering vacations -->
-<!--<script>
-        $(document).ready(function () {
-            // Handle user registration form submission
-            const server = "https://localhost:7031/";
-
-            $("#updateBtn").click(function (event) {
-                event.preventDefault();
-                updateUserDetails(); // Call function to update user details
-            });
-
-            $("#registrationForm").submit(function (event) {
-                event.preventDefault(); // Prevent default form submission
-                submitUserRegistration(); // Call function to submit user registration
-            });
-
-            $("#loginForm").submit(function (event) {
-                event.preventDefault(); // Prevent default form submission
-                submitUserLogin(); // Call function to submit user login
-
-            });
-
-
-
-            let userObject = sessionStorage.getItem('userLoggedIn');
-
-            // Check if the user object exists in session storage
-            if (userObject) {
-                // Parse the user object from JSON
-                let user = JSON.parse(userObject);
-
-                // Populate the email field in the registration form
-                let registrationEmailField = $('#email');
-                registrationEmailField.val(user.email);
-                registrationEmailField.prop('readonly', true); // Set the field as readonly
-
-                // Enable the update button
-                $('#updateBtn').prop('disabled', false);
-            } else {
-                // If the user object doesn't exist in session storage, allow editing
-                $('#email').prop('readonly', false);
-                // Disable the update button
-                $('#updateBtn').prop('disabled', true);
-            }
-
-
-
-
-
-
-
-            function submitUserRegistration() {
-
-                let email = $("#email").val();
-
-                if (!isValidEmail(email)) {
-                    alert("Please enter a valid email address.");
-                    return;
-                }
-
-                let newUser = {
-                    firstName: $("#firstName").val(),
-                    lastName: $("#familyName").val(),
-                    email: $("#email").val(),
-                    password: $("#password").val(), // No need to parseInt for password
-                };
-
-
-                let api = server + "api/Users";
-
-                ajaxCall("POST", api, JSON.stringify(newUser), postSCB, postECB);
-            }
-
-            function isValidEmail(email) {
-                // Regular expression for validating email format
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-
-
-            function postSCB(response) {
-                console.log("User registered successfully:", response);
-
-                // Display a popup indicating successful registration and prompt for login
-                alert("Registration successful! Please proceed to login.");
-
-                document.getElementById("registrationForm").reset();
-
-                // You can optionally redirect the user to the login page
-                // window.location.href = "login.html";
-            }
-
-            function postECB(error) {
-                console.error("Error occurred during user registration:", error);
-
-                if (error.status === 409) {
-                    alert("This email address is already registered. Please use a different email address.");
-                } else {
-                    // Handle other errors appropriately
-                    // You might display a generic error message to the user
-                    alert("An error occurred during user registration. Please try again later.");
-                }
-            }
-
-
-
-            function submitUserLogin() {
-                let loginData = {
-                    email: $("#loginEmail").val(),
-                    password: $("#loginPassword").val(),
-                    firstName: "",
-                    lastName: "",
-                };
-
-                let api = server + `api/Users/login`;
-
-                ajaxCall("POST", api, JSON.stringify(loginData), postSUL, postEUL);
-
-
-            }
-
-
-
-            function postSUL(response) {
-                console.log("User login successfully:", response);
-
-                sessionStorage.setItem('userLoggedIn', JSON.stringify(response));
-
-
-
-
-
-
-                // Display a popup indicating successful registration and prompt for login
-                alert("Login successful! take a flat and vacation !");
-
-                //windowref to.
-                console.log("Before redirection");
-                window.location.href = 'Flats.html';
-                console.log("After redirection");
-
-                document.getElementById("loginForm").reset();
-
-
-
-                // You can optionally redirect the user to the login page
-                // window.location.href = "login.html";
-            }
-
-            function postEUL(error) {
-                console.error("You must register first !", error)
-
-                alert("Invalid login details");
-
-                document.getElementById("loginForm").reset();
-
-            }
-
-
-            function updateUserDetails() {
-                let updatedUser = {
-                    email: $("#email").val(),
-                    password: $("#password").val(), // No need to parseInt for password
-                    firstName: $("#firstName").val(),
-                    lastName: $("#familyName").val(),
-                };
-
-
-                let api = server + `api/Users/update`; // Construct the API endpoint URL with the email
-
-
-                ajaxCall("PUT", api, JSON.stringify(updatedUser), putSUB, putEUB);
-            }
-
-            function putSUB(response) {
-                console.log("User details updated successfully:", response);
-                alert("User details updated successfully!");
-
-                sessionStorage.setItem('userLoggedIn', JSON.stringify(response));
-
-                document.getElementById("registrationForm").reset();
-            }
-
-            function putEUB(error) {
-                console.error("Error occurred during user details update:", error);
-                alert("An error occurred during user details update. Please try again later.");
-            }
-
-
-
-
-
-        });
-    </script>
-</body>
-</html>-->
-
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -380,6 +136,8 @@
 
             function submitUserRegistration() {
 
+              
+
                 let email = $("#email").val();
 
                 if (!isValidEmail(email)) {
@@ -394,7 +152,7 @@
                     password: $("#password").val(), // No need to parseInt for password
                 };
 
-
+                
                 let api = server + "api/Users";
 
                 ajaxCall("POST", api, JSON.stringify(newUser), postSCB, postECB);
@@ -442,7 +200,7 @@
                 let api = server + `api/Users/login`;
 
                 ajaxCall("POST", api, JSON.stringify(loginData), postSUL, postEUL);
-
+                
 
             }
 
@@ -452,24 +210,21 @@
                 sessionStorage.setItem('userLoggedIn', JSON.stringify(response));
 
 
-
-
-
-
                 // Display a popup indicating successful registration and prompt for login
-                alert("Login successful! take a flat and vacation !");
+                alert("Login successful!");
 
                 //windowref to.
-                console.log("Before redirection");
-                window.location.href = 'Flats.html';
-                console.log("After redirection");
-
+                if (response.email == "admin@gmail.com" && response.password == "admin") {
+                    window.location.href = 'admin.html';
+                }
+                else {
+                    console.log("Before redirection");
+                    window.location.href = 'Flats.html';
+                    console.log("After redirection");
+                }
+               
                 document.getElementById("loginForm").reset();
 
-
-
-                // You can optionally redirect the user to the login page
-                // window.location.href = "login.html";
             }
 
             function postEUL(error) {
