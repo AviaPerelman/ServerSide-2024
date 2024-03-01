@@ -60,6 +60,13 @@ namespace HomeWork2.Controllers
             return user.Update();
         }
 
+        [HttpPut]
+        [Route("isActive")]
+        public int updateActive([FromBody] User u)
+        {
+            return u.UpdateIsActive();
+        }
+
         // DELETE api/<UsersController>/5
         [HttpDelete("delete")]
         public int Delete([FromBody] string email)

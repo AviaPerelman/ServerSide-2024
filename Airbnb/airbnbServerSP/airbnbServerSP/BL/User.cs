@@ -78,6 +78,12 @@ namespace HomeWork2.BL
             DBservices dbs = new DBservices();
             return dbs.DeleteUserByEmail(email);
         }
-        
+
+        public int UpdateIsActive()
+        {
+            DBservices dbs = new DBservices();
+            return dbs.UpdateUserIsActive(this);
+        }
+
     }
 }

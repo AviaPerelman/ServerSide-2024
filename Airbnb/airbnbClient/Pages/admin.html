@@ -38,6 +38,8 @@
 
             $("#container").hide();
 
+            $("#updateForm").submit(onSubmitFunc);
+
             $(document).on("click", "#showManageUserTable", function () {
                 $("#container").toggle();
 
@@ -106,25 +108,64 @@
 
 
             ajaxCalls("DELETE", `${server}api/Users/delete`, JSON.stringify(userEmail), deleteSuccess, deleteError);
-         
+
         }
 
-        function onSubmitFunc() {
-            // Implement your submit form logic here
+        function onSubmitFunc(event) {
+            event.preventDefault();
+
+
+            let userAfterEdit = {
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                email: $("#email").val(),// add required
+                password: $("#password").val(),
+                isActive: $("#isActive").prop("checked",),
+                
+
+            };
+            ajaxCalls(
+                "PUT",
+                `${server}api/Users/isActive`,
+                JSON.stringify(userAfterEdit),
+                updateSuccess,
+                errorUpdate
+            );
+
+
         }
 
 
+        function errorUpdate(e) {
+            swal('Error : ', e);
+        };
 
+        function updateSuccess(user) {
+            console.log(user);
+            // Gather the updated user details from the form fields
+            let updatedUser = {
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                email: $("#email").val(),
+                password: $("#password").val(),
+                isActive: $("#isActive").prop("checked")
+            };
 
-        function updateSuccess(usersData) {
-            redrawTable(tbl, usersData);
+            // Find the index of the updated user in the local data array
+            let index = users.findIndex(user => user.email === updatedUser.email);
+
+            // Update the user details in the local data array
+            users[index] = updatedUser;
+
+            // Redraw the table with the updated data
+            redrawTable(tbl, users);
             buttonEvents();
             $("#editDiv").hide();
             swal("Updated Successfully!", "Great Job", "success");
         }
 
         function deleteError(e) {
-            swal('Error : ' , e);
+            swal('Error : ', e);
         }
 
         function deleteSuccess() {
@@ -196,7 +237,15 @@
                             }
                         }
                         ,
-                        { data: "isAdmin" }
+                        {
+                            data: "isAdmin",
+                            render: function (data, type, row, meta) {
+                                if (data == true)
+                                    return '<input type="checkbox" checked disabled="disabled" /> ';
+                                else {
+                                    return '<input type="checkbox"  disabled="disabled" /> ';
+                                }
+                            }    }
                     ]
                 });
                 buttonEvents();
@@ -281,8 +330,6 @@
                     </div>
 
 
-
-
                 </div>
 
                 <div class="form-group row">
@@ -290,16 +337,9 @@
                         <label for="automatic"><span class="red-star">★ </span>IsActive?</label>
                         <input type="checkbox"
                                class="form-control"
-                               id="isActive"
-                                />
+                               id="isActive" />
                     </div>
-                    <div class="form-group col-sm-3">
-                        <label for="automatic"><span class="red-star">★ </span>IsAdmin?</label>
-                        <input type="checkbox"
-                               class="form-control"
-                               id="isAdmin"
-                                />
-                    </div>
+
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" id="saveBTN">
