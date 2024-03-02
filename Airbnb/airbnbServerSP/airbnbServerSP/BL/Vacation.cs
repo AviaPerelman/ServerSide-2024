@@ -127,6 +127,12 @@
             DBservices dbs = new DBservices();
             return dbs.ReadVacationsByEmail(email);
         }
+
+        public Object Report(string m)
+        {
+            DBservices dbs = new DBservices();
+            return dbs.GetAveragePrices(m);
+        }
     }
 }
 

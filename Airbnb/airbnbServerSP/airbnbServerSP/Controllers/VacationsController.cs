@@ -57,6 +57,14 @@ namespace HomeWork2.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpGet]
+        [Route("GetAveragePrices")]
+        public Object GetAveragePrices(string month)
+        {
+            Vacation vacation = new Vacation();
+            return vacation.Report(month);
+        }
     }
 }
 

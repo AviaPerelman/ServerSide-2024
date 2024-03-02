@@ -1,8 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-
-
     <title>DataTable</title>
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -43,8 +41,6 @@
 
             $(document).on("click", "#hideBtn", function () {
                 $("#editDiv").hide();
-
-
             });
 
 
@@ -53,8 +49,35 @@
 
 
             });
-            
+
+            $("#logoutButton").click(function () {
+                // Clear sessionStorage
+                sessionStorage.clear();
+
+                // Redirect to the registration page
+                window.location.href = 'Registertion.html';
+            });
+
             $('#editDiv').hide();
+
+
+            $("#getAveragePricesBtn").click(function () {
+                var selectedMonth = $("#monthDropdown").val();
+
+                ajaxCalls("GET", `${server}api/Vacations/GetAveragePrices?month=${selectedMonth}`, "", displayAveragePrices, displayError);
+            });
+            function displayError(e) {
+                swal('Display Error ', e);
+            }
+            function displayAveragePrices(averagePrices) {
+                console.log(averagePrices);
+                $("#averagePricesList").empty();
+                averagePrices.forEach(function (city) {
+                    var listItem = "<li>" + city.city + ": " + city.averagePrice + "</li>";
+                    $("#averagePricesList").append(listItem);
+                });
+                $("#averagePricesContainer").show();
+            }
         });
 
         function buttonEvents() {
@@ -130,7 +153,7 @@
                 email: $("#email").val(),// add required
                 password: $("#password").val(),
                 isActive: $("#isActive").prop("checked",),
-                
+
 
             };
             ajaxCalls(
@@ -254,7 +277,8 @@
                                 else {
                                     return '<input type="checkbox"  disabled="disabled" /> ';
                                 }
-                            }    }
+                            }
+                        }
                     ]
                 });
                 buttonEvents();
@@ -269,9 +293,6 @@
 
     </script>
 
-
-
-
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -279,6 +300,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">User DataTable</a>
                 <button id="showManageUserTable">Manage table users</button>
+                <button id="logoutButton">Logout</button>
             </div>
         </div>
     </nav>
@@ -298,9 +320,35 @@
                 </thead>
             </table>
         </form>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="monthDropdown">Select a Month:</label>
+                <select class="form-control" id="monthDropdown">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
 
-
-
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" id="getAveragePricesBtn">Get Average Prices</button>
+            </div>
+        </div>
+        <br>
+        <!-- Display average prices per city -->
+        <div id="averagePricesContainer">
+            <h4>Average Prices per Night:</h4>
+            <ul id="averagePricesList"></ul>
+        </div>
         <div id="editDiv">
             <form id="updateForm">
                 <div class="form-group row">
@@ -360,19 +408,5 @@
             </form>
         </div>
     </div>
-
-    <!--<div id="editDiv">
-        <form id="updateForm">
-            <label for="firstname">Firstname:</label>
-            <input type="text" id="firstName" required><br><br>
-            <label for="LastName">LastName:</label>
-            <input type="text" id="lastName" required><br><br>
-            <label for="email">Email:</label>
-            <input type="text" id="email" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required><br><br>
-            <button type="submit" id="updateBtn">Update</button>
-        </form>
-    </div>-->
 </body>
 </html>

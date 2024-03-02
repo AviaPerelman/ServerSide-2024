@@ -74,5 +74,7 @@ namespace HomeWork2.Controllers
             User user = new User();
             return user.Delete(email);
         }
+
+       
     }
 }

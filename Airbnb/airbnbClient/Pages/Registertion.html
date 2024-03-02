@@ -101,6 +101,8 @@
                 submitUserLogin(); // Call function to submit user login
             });
 
+            
+
             let userObject = sessionStorage.getItem('userLoggedIn');
 
             // Check if the user object exists in session storage
@@ -149,7 +151,8 @@
                     firstName: $("#firstName").val(),
                     lastName: $("#familyName").val(),
                     email: $("#email").val(),
-                    password: $("#password").val(), // No need to parseInt for password
+                    password: $("#password").val(),
+                    isActive : true
                 };
 
                 
@@ -206,24 +209,26 @@
 
             function postSUL(response) {
                 console.log("User login successfully:", response);
+                
+                if (response['isActive'] === false) {
+                    alert('This User Is not active , you cannot continue . ');
+                    $("#loginModal").modal("hide");
+                    return;
+                } else {
+                    sessionStorage.setItem('userLoggedIn', JSON.stringify(response));
+                    alert("Login successful!");
+                    if (response.email == "admin@gmail.com" && response.password == "admin") {
+                        window.location.href = 'admin.html';
+                    }
+                    else {
+                        console.log("Before redirection");
+                        window.location.href = 'Flats.html';
+                        console.log("After redirection");
+                    }
 
-                sessionStorage.setItem('userLoggedIn', JSON.stringify(response));
+                    document.getElementById("loginForm").reset();
 
-
-                // Display a popup indicating successful registration and prompt for login
-                alert("Login successful!");
-
-                //windowref to.
-                if (response.email == "admin@gmail.com" && response.password == "admin") {
-                    window.location.href = 'admin.html';
                 }
-                else {
-                    console.log("Before redirection");
-                    window.location.href = 'Flats.html';
-                    console.log("After redirection");
-                }
-               
-                document.getElementById("loginForm").reset();
 
             }
 
