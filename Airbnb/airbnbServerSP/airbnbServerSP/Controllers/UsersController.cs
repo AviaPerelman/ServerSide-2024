@@ -67,5 +67,35 @@ namespace HomeWork2.Controllers
             User user = new User();
             return user.Delete(email);
         }
+
+        [HttpGet("averagePricePerNight/{month}")]
+        public List<object> GetAveragePricePerNight(int month)
+        {
+            try
+            {
+                // Use your DBservices to get the average price per night
+                DBservices dbServices = new DBservices();
+                List<object> result = dbServices.GetAveragePricePerNight(month);
+
+                if (result.Count > 0)
+                {
+                    // Return the result if data is available
+                    return result;
+                }
+                else
+                {
+                    // Return an empty list if no data is available for the selected month
+                    return new List<object>();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Exception: {ex.Message}");
+                // Return an empty list or handle the error as appropriate for your application
+                return new List<object>();
+            }
+        }
+
     }
 }

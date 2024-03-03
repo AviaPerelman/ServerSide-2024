@@ -309,6 +309,8 @@ public class DBservices
             u.LastName = dataReader["LastName"].ToString();
             u.Email = dataReader["Email"].ToString();
             u.Password = dataReader["Password"].ToString();
+            u.IsActive = Convert.ToBoolean(dataReader["IsActive"]);
+            u.IsAdmin = Convert.ToBoolean(dataReader["IsAdmin"]);
 
             users.Add(u);
         }
@@ -615,6 +617,8 @@ public class DBservices
 
         cmd.Parameters.AddWithValue("@password", user.Password);
 
+        cmd.Parameters.AddWithValue("@isActive", user.IsActive);
+
 
         return cmd;
     }
@@ -657,8 +661,10 @@ public class DBservices
                     FirstName = dataReader["FirstName"].ToString(),
                     LastName = dataReader["LastName"].ToString(),
                     Email = dataReader["Email"].ToString(),
-                    Password = dataReader["Password"].ToString()
-                };
+                    Password = dataReader["Password"].ToString(),
+                    IsActive = Convert.ToBoolean(dataReader["IsActive"]),
+                    IsAdmin = Convert.ToBoolean(dataReader["IsAdmin"])
+            };
 
 
 
@@ -778,7 +784,58 @@ public class DBservices
         return cmd;
     }
 
+    public List<object> GetAveragePricePerNight(int month)
+    {
+        List<object> result = new List<object>();
+
+        // Use your connect method to open a connection
+        using (SqlConnection connection = connect("myProjDB"))
+        {
+            try
+            {
+                // Create and configure a SqlCommand for the stored procedure
+                using (SqlCommand command = new SqlCommand("SP_GetAveragePricePerNight", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    // Add parameters
+                    command.Parameters.AddWithValue("@Month", month);
+
+                    // Execute the command and read the data
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Log the values being read
+                            Console.WriteLine($"City: {reader["city"]}, AveragePricePerNight: {reader["AveragePricePerNight"]}");
+
+                            // Create an ad hoc object with properties "City" and "AveragePrice"
+                            var cityAverage = new
+                            {
+                                City = reader["city"].ToString(),
+                                AveragePrice = Convert.ToDouble(reader["AveragePricePerNight"])
+                            };
+
+                            result.Add(cityAverage);
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                throw ex;
+            }
+        }
+
+        return result;
+    }
+
+
 }
+
+
 
 
 

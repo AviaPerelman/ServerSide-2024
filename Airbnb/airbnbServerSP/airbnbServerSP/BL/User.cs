@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace HomeWork2.BL
@@ -79,5 +80,31 @@ namespace HomeWork2.BL
             return dbs.DeleteUserByEmail(email);
         }
         
+        //public ActionResult GetAveragePricePerNight(int month)
+        //{
+        //    try
+        //    {
+        //        // Use your DbServices to get the average price per night
+        //        DBservices dbServices = new DBservices();
+        //        List<object> result = dbServices.GetAveragePricePerNight(month);
+
+        //        if (result.Count > 0)
+        //        {
+        //            // Return the result if data is available
+        //            return Ok(result);
+        //        }
+        //        else
+        //        {
+        //            // Return 404 if no data is available for the selected month
+        //            return NotFound("No data available for the selected month.");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception
+        //        return StatusCode(500, $"Internal Server Error: {ex.Message}");
+        //    }
+        
+        //}
     }
 }
